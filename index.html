@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .container{ 
+            display: flex;
+            gap:.4rem;
+        }
+        li{
+            list-style: none;
+        }
+        li img{
+            width: 100%;
+            height:100%;
+
+            object-fit:cover;
+        }
+    </style>
+
+    <div class="container"></div>
+
+    <script>
+        const getImages = async() => {
+            const nameOfFile = 'instagram-davidlpc1.json'
+            const response = await fetch(nameOfFile)
+            const data = await response.json()
+            const htmlList = await data
+                .map(({ src }) =>`<li> <img src="${src}"> </li>`)
+                .join('')
+                
+            document.querySelector('.container').innerHTML = htmlList
+        }
+
+        getImages()
+    </script>
+</body>
+</html>
